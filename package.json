@@ -1,0 +1,27 @@
+{
+  "name": "nilla",
+  "version": "0.1.0",
+  "description": "MVC written in vanillaJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start --conf karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theDevelopper/nilla.git"
+  },
+  "author": "The Developper",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/theDevelopper/nilla/issues"
+  },
+  "homepage": "https://github.com/theDevelopper/nilla#readme",
+  "devDependencies": {
+    "browserify": "13.0.1",
+    "jasmine-core": "2.4.1",
+    "karma": "1.1.0",
+    "karma-browserify": "5.0.5",
+    "karma-chrome-launcher": "1.0.1",
+    "karma-jasmine": "1.0.2"
+  }
+}
