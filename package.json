@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "MVC written in vanillaJS",
   "main": "index.js",
+  
   "scripts": {
     "test": "./node_modules/karma/bin/karma start --conf karma.conf.js",
     "build": "./node_modules/browserify/bin/cmd.js index.js -o dist/nilla.js && git add dist/nilla.js && git commit -m 'updated dist'; exit 0",
@@ -18,11 +19,13 @@
     "type": "git",
     "url": "git+https://github.com/theDevelopper/nilla.git"
   },
+
   "author": "The Developper",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/theDevelopper/nilla/issues"
   },
+
   "homepage": "https://github.com/theDevelopper/nilla#readme",
   "devDependencies": {
     "browserify": "13.0.1",
