@@ -25,7 +25,7 @@ console.log(model.get('foo'));
 console.log(model.get('foo', true));
 
 },{"./src/nilla.js":3}],2:[function(require,module,exports){
-module.exports = function(obj) {
+var _extend = function(obj) {
 	obj = obj || {};
 	obj.name = obj.name || this.name || undefined;
 
@@ -69,6 +69,8 @@ module.exports = function(obj) {
 
 	return Extended;
 };
+
+module.exports = _extend;
 
 },{}],3:[function(require,module,exports){
 var _extend = require('./extend.function.js');
