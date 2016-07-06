@@ -1,4 +1,4 @@
-module.exports = function(obj) {
+var _extend = function(obj) {
 	obj = obj || {};
 	obj.name = obj.name || this.name || undefined;
 
@@ -42,3 +42,5 @@ module.exports = function(obj) {
 
 	return Extended;
 };
+
+module.exports = _extend;
