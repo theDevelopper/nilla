@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start --conf karma.conf.js",
-	"build": "./node_modules/browserify/bin/cmd.js index.js -o dist/nilla.js",
+    "build": "./node_modules/browserify/bin/cmd.js index.js -o dist/nilla.js; git add dist/nilla.js; git commit -m 'updated dist';",
 
-	"prepublish": "npm run build",
-	"prebuild": "npm run test"
+    "prebuild": "npm run test"
   },
+
+  "prepush": "npm run build",
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/theDevelopper/nilla.git"
@@ -26,6 +28,7 @@
     "karma": "1.1.0",
     "karma-browserify": "5.0.5",
     "karma-chrome-launcher": "1.0.1",
-    "karma-jasmine": "1.0.2"
+    "karma-jasmine": "1.0.2",
+    "pre-push": "^0.1.1"
   }
 }
