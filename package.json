@@ -10,7 +10,9 @@
     "prebuild": "npm run test"
   },
 
-  "prepush": "npm run build",
+  "pre-push": [
+	  "build"
+  ],
 
   "repository": {
     "type": "git",
