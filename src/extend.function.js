@@ -1,50 +1,33 @@
-var _extend = function(obj) {
-	obj = obj || {};
-	var name = obj.name || this.name || undefined;
-
+var _extend = function(name, proto, static) {
 	if (!(name && typeof name === 'string' && name.length)) {
 		throw Error('malformed data to extend Nilla');
 	}
 
-	obj.initialize = (obj.initialize && typeof obj.initialize === 'function') ? obj.initialize : function(){};
+	var initialize = (proto.initialize && typeof proto.initialize === 'function') ? proto.initialize : function(){};
+	delete proto.initialize;
 
-	var Extended = {};
-	Extended[name] = function(options) {
-		for (var key in obj) {
-			if (obj.hasOwnProperty(key)) {
-				if (typeof obj[key] !== 'function') {
-					this[key] = obj[key];
-					delete obj[key];
-				}
-			}
-		}
+	var extended = new Function("return function " + name + "(options){ this._preInitialize(); this.initialize(options) };")();
 
-		this.extend = _extend;
+	extended.prototype = Object.create(this.prototype);
 
-		 this.initialize(options);
+	Object.defineProperty(extended, "name", { value: name });
+	Object.defineProperty(extended, "displayName", { value: name });
+
+	extended.prototype.constructor = extended;
+	extended.prototype.initialize = initialize;
+	extended.prototype._preInitialize = function() {
+		Object.assign(this, static);
 	};
 
-	Object.defineProperty(Extended[name], "name", { value: name });
-	Object.defineProperty(Extended[name], "displayName", { value: name });
-	Extended[name].displayName = name;
-
-	Extended[name].prototype = Object.create(this.prototype);
-
-	Extended[name].prototype.constructor = Extended[name];
-	Extended[name].prototype.initialize = obj.initialize;
-
-	delete obj.name;
-	delete obj.initialize;
-
-	for (var key in obj) {
-		if (obj.hasOwnProperty(key)) {
-			if (typeof obj[key] === 'function') {
-				Extended[name].prototype[key] = obj[key];
-			}
+	for (var key in proto) {
+		if (proto.hasOwnProperty(key)) {
+			extended.prototype[key] = proto[key];
 		}
 	}
 
-	return Extended[name];
+	extended.extend = _extend;
+
+	return extended;
 };
 
 module.exports = _extend;

@@ -7,13 +7,12 @@
   "scripts": {
     "test": "./node_modules/karma/bin/karma start --conf karma.conf.js",
     "build": "./node_modules/browserify/bin/cmd.js index.js --standalone Nilla > dist/nilla.js && ./node_modules/browserify/bin/cmd.js index-es6.js --standalone Nilla > dist/nilla-es6.js",
-	"dist": "git add dist/nilla.js && git commit -m 'updated dist'; exit 0",
-
-    "prebuild": "npm run test"
+	"dist": "git add dist/nilla.js && git commit -m 'updated dist'; exit 0"
   },
 
   "pre-push": [
 	  "build",
+	  "test",
 	  "dist"
   ],
 
