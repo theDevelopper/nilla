@@ -1,14 +1,15 @@
 var _extend = function(obj) {
 	obj = obj || {};
-	obj.name = obj.name || this.name || undefined;
+	var name = obj.name || this.name || undefined;
 
-	if (!(obj.name && typeof obj.name === 'string' && obj.name.length)) {
+	if (!(name && typeof name === 'string' && name.length)) {
 		throw Error('malformed data to extend Nilla');
 	}
 
 	obj.initialize = (obj.initialize && typeof obj.initialize === 'function') ? obj.initialize : function(){};
 
-	var Extended = function(options) {
+	var Extended = {};
+	Extended[name] = function(options) {
 		for (var key in obj) {
 			if (obj.hasOwnProperty(key)) {
 				if (typeof obj[key] !== 'function') {
@@ -20,14 +21,17 @@ var _extend = function(obj) {
 
 		this.extend = _extend;
 
-		this.initialize(options);
+		 this.initialize(options);
 	};
 
-	Extended.prototype = Object.create(this.prototype);
+	Object.defineProperty(Extended[name], "name", { value: name });
+	Object.defineProperty(Extended[name], "displayName", { value: name });
+	Extended[name].displayName = name;
 
-	//Extended.prototype.constructor = Extended;
-	Extended.prototype.name = obj.name;
-	Extended.prototype.initialize = obj.initialize;
+	Extended[name].prototype = Object.create(this.prototype);
+
+	Extended[name].prototype.constructor = Extended[name];
+	Extended[name].prototype.initialize = obj.initialize;
 
 	delete obj.name;
 	delete obj.initialize;
@@ -35,12 +39,12 @@ var _extend = function(obj) {
 	for (var key in obj) {
 		if (obj.hasOwnProperty(key)) {
 			if (typeof obj[key] === 'function') {
-				Extended.prototype[key] = obj[key];
+				Extended[name].prototype[key] = obj[key];
 			}
 		}
 	}
 
-	return Extended;
+	return Extended[name];
 };
 
 module.exports = _extend;
