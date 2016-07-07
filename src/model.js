@@ -6,6 +6,8 @@ var Model = Nilla.extend({
 	data: {},
 
 	get: function(key, fallbackValue) {
+		console.log(arguments);
+
 		return (this.data.hasOwnProperty(key) && key != null) ? this.data[key] : fallbackValue;
 	},
 
