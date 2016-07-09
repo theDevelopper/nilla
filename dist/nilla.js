@@ -36,12 +36,12 @@ var Dispatcher = Nilla.extend('Dispatcher', {
 
 	publish: function() {
 		if (arguments.length) {
-			var data = Array.prototype.slice(1);
+			var data = Array.prototype.slice.call(arguments, 1);
 			var events = arguments[0].split(':');
 			var index = 0, event = '';
 
 			while (events[index]) {
-				event += events[index];
+				event += events[index++];
 
 				if (this.eventQueue.hasOwnProperty(event)) {
 					var listener = this.eventQueue[event];
