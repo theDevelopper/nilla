@@ -1,6 +1,8 @@
 var Nilla = require('./nilla.js');
 
 var Model = Nilla.extend('Model', {
+	data: {},
+
 	get: function(key, fallbackValue) {
 		if (!arguments.length) {
 			return this.data;
@@ -12,8 +14,6 @@ var Model = Nilla.extend('Model', {
 	set: function(key, value) {
 		this.data[key] = value;
 	}
-}, {
-	data: {}
 });
 
 module.exports = Model;
